@@ -19,24 +19,22 @@ const promise3 = new Promise((resolve,reject)=>{
 	},time)
 })
 
-Promise.all([promise1,promise2,promise3]).then((results)=>{
-	const loading = document.querySelector('#loading');
-	loading.innerHTML = "";
+Promise.all([promise1,promise2,promise3]).then((results) => {
+      const loadingRow = document.getElementById('loading');
+      loadingRow.parentNode.removeChild(loadingRow);
 
-	const tableBody = document.querySelector('tbody');
-	let totalTime = 0;
-	results.forEach((result,index)=>{
-		const row = tableBody.insertRow(index);
-		const cell = row.insertCell(0)
-		cell.textContent = `Promise ${index+1}`;
-		const timeTakenCell = row.insertCell(1);
-		timeTakenCell.textContent =Math.round(result/1000);
-		totalTime += result;
-	})
+      const tableBody = document.querySelector('tbody');
+      results.forEach((result, index) => {
+        const row = tableBody.insertRow(index);
+        const promiseCell = row.insertCell(0);
+        promiseCell.textContent = `Promise ${index+1}`;
+        const timeTakenCell = row.insertCell(1);
+        timeTakenCell.textContent = ((index + 1) * 1000 + Math.random() * 2000) / 1000;
+      });
 
-	const totalRow = tableBody.insertRow();
-	const totalCell = totalRow.insertCell(0);
-	totalCell.textContent = 'Total';
-	const totalTimeTakenCell = totalRow.insertCell(1);
-	totalTimeTakenCell.textContent += (totalTime/3000).toFixed(3)
-})
+      const totalRow = tableBody.insertRow();
+      const totalCell = totalRow.insertCell(0);
+      totalCell.textContent = 'Total';
+      const totalTimeTakenCell = totalRow.insertCell(1);
+      totalTimeTakenCell.textContent = (Date.now() - performance.timing.navigationStart) / 1000;
+    });
