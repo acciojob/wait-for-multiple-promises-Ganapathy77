@@ -38,5 +38,5 @@ Promise.all([promise1,promise2,promise3]).then((results)=>{
 	const totalCell = totalRow.insertCell(0);
 	totalCell.textContent = 'Total';
 	const totalTimeTakenCell = totalRow.insertCell(1);
-	totalTimeTakenCell.textContent += (totalTime/3000).toFixed(4)
+	totalTimeTakenCell.textContent += (totalTime/3000).toFixed(3)
 })
